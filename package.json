@@ -8,5 +8,6 @@
     "run-program": "node index.js"
   },
   "author": "Yaki Klein",
-  "license": "ISC"
+  "license": "ISC",
+  "type": "module"
 }
