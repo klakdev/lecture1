@@ -47,3 +47,68 @@ if(x === "goodbye") {
     
 }
 
+function printName(firstName, lastName) {
+    return firstName + " " + lastName;
+}
+
+const person = {
+    firstName: "Yaki",
+    lastName: "Klein",
+    age: 37,
+    printName: function() {
+        return this.firstName + " " + this.lastName;
+    }
+}
+
+abstract class Person implements Human {
+    firstName: string;
+    lastName: string;
+    birthday: any;
+    constructor(firstName: string, lastName: string, birthday) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthday = birthday;
+    }
+    abstract  printName(): string;
+}
+
+
+class Student extends Person<Date> {
+    constructor(firstName: string, lastName: string) {
+        super(firstName, lastName, new Date())
+    }
+    printName(): string {
+        return "Student:" + this.firstName + " " + this.lastName;
+    }
+    satHappyBirthday() {
+        this.birthday.getFullYear()
+    }
+}
+
+class Lecturer extends Person {
+    constructor(firstName: string, lastName: string) {
+        super(firstName, lastName, 12354545)
+    }
+    printName(): string {
+        return "Lecturer:" + this.firstName + " " + this.lastName;
+    }
+
+}
+
+interface Human<T extends Date | string | number> {
+    firstName: string;
+    lastName: string;
+    birthday: T;
+    hobbies?: Array<string> 
+    printName: () => string;
+    getBirthday: () => T
+    
+}
+const x: Human<> = {
+    birthday: 
+}
+
+
+
+
+add<number>(1, 1)

@@ -15,3 +15,4 @@ function printUser(user) {
     console.log("user %s", user);
 }
 printUser(user);
+
