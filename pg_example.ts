@@ -6,6 +6,15 @@ async function makeQuery(
     street_1: string, postal_code: string, phone_number: string
 ) {
 
+
+
+
+
+
+
+
+
+    
     // simple queries
     const client = new Client({
         user: 'student_server',

@@ -6,13 +6,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "run-program": "ts-node ./lecture4.ts",
-    "query-pg": "ts-node ./pg_example.ts"
+    "query-pg": "ts-node ./pg_example.ts",
+    "run-model": "ts-node ./model/index.ts"
   },
   "author": "Yaki Klein",
   "license": "ISC",
   "dependencies": {
     "@types/pg": "^8.6.6",
     "pg": "^8.8.0",
+    "sequelize": "^6.28.0",
     "typescript": "^4.9.4"
   },
   "devDependencies": {
