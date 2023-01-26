@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "run-program": "ts-node ./lecture4.ts",
     "query-pg": "ts-node ./pg_example.ts",
-    "run-model": "ts-node ./model/index.ts"
+    "run-model": "ts-node ./database/index.ts"
   },
   "author": "Yaki Klein",
   "license": "ISC",
