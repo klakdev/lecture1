@@ -1,13 +1,13 @@
 import { Sequelize, DataTypes, Model, ModelStatic } from "sequelize";
-import { Student } from "../model/student"
+import { Model as AppModel } from "../model"
 
-type StudentSchemaModel = Model<Student>
+type StudentSchemaModel = Model<AppModel["Student"]>
 
 export interface StudentInterface {
     Schema: ModelStatic<StudentSchemaModel>
-    insert: (student: Omit<Student, "id" | "completeRegistration">) => Promise<Student>
+    insert: (student: Omit<AppModel["Student"], "id" | "completeRegistration">) => Promise<AppModel["Student"]>
+    getStudent(id: string): Promise<AppModel["Student"] | undefined>;
 }
-
 
 export async function createTable(sequelize: Sequelize): Promise<StudentInterface> {
     const StudentSchema = sequelize.define<StudentSchemaModel>("Student", {
@@ -61,12 +61,17 @@ export async function createTable(sequelize: Sequelize): Promise<StudentInterfac
         createdAt: false,
     })
     
-    await StudentSchema.sync({force: true})
+    await StudentSchema.sync()
+
     return {
         Schema: StudentSchema,
         async insert(student) {
-            const result = await StudentSchema.create(student as Student)
+            const result = await StudentSchema.create(student as AppModel["Student"])
             return result.toJSON();
         },
+        async getStudent(id) {
+            const result = await StudentSchema.findByPk(id);
+            return result?.toJSON(); // return result ? result.toJSON() : undefined
+        }
     };
 }
