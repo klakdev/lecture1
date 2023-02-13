@@ -1,20 +1,24 @@
-import express, { Response, Request } from "express"
+import express from "express"
+import { createStudentRoute } from "./student"
+import { createRouter } from "./course"
+import { main as initDB } from "../database"
 
-const app = express()
 
+async function main() {
+  const app = express()
 
-app.get('/course/:courseId/students/:studentId', (req: Request, res: Response) => {
-    res.setHeader("Content-Type", "application/json")
-    res.sendFile("./file.txt")
-    res.
-})
+  const db = await initDB()
+  app.use(express.json({ limit: "10kb" }))
+  app.use("/student", createStudentRoute(db));
+  app.use("/course", createRouter(db))
+  
+  app.listen(8088, () => {
+    console.log(`Example app listening on port 8088`)
+  })
+}
 
-app.get('/user', (_req, res) => {
-    res.send('Hello World!')
-})
-
-app.listen(8088, () => {
-  console.log(`Example app listening on port 8088`)
+main().then(() => {
+  console.log("Exiting")
 })
 
 // // method  protocol       auth        host        port     path           query

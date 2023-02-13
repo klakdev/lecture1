@@ -6,6 +6,7 @@ type CourseSchemaModel = Model<Course>
 export interface CourseInterface {
     Schema: ModelStatic<CourseSchemaModel>
     insert: (course: Omit<Course, "id">) => Promise<Course>
+    searchById: (id: string) => Promise<Course|undefined>
 }
 
 
@@ -44,6 +45,10 @@ export async function createTable(sequelize: Sequelize): Promise<CourseInterface
             const result = await CourseSchema.create(course as Course)
             return result.toJSON();
         },
+        async searchById(id: string) {
+            const result = await CourseSchema.findByPk(id)
+            return result?.toJSON();
+        }
     };
 }
 
