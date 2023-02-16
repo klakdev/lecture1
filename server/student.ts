@@ -1,15 +1,20 @@
 import express from "express"
 import { DB } from "../database"
 
+function studentIDHandler() {
+    const router = express.Router()
+    router.get("/", (req, res) => {})
+    router.delete("/", (req, res) => {})
+    router.put("/", (req, res) => {})
+    return router
+}
+
 export function createStudentRoute(db: DB) {
     const studentRouter = express.Router({});
 
-    studentRouter.get('/:studentId', async(req, res) => {
-        const student = await db.Student.getStudent(req.params.studentId);
-        if(!student) {
-            res.status(404).json({status: "Not Found"})
-        }
-        res.json(student)
+    studentRouter.use('/:studentId', studentIDHandler())
+    studentRouter.get('/:studentId/courses', async(req, res) => {
+        const student = await db.Course.searchCourseOfStudent(req.params.studentId);
     })
     return studentRouter;
 }

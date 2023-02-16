@@ -2,6 +2,7 @@ import express from "express"
 import { createStudentRoute } from "./student"
 import { createRouter } from "./course"
 import { main as initDB } from "../database"
+import { createServer } from "http"
 
 
 async function main() {
@@ -9,8 +10,9 @@ async function main() {
 
   const db = await initDB()
   app.use(express.json({ limit: "10kb" }))
-  app.use("/student", createStudentRoute(db));
+  app.use("/student", createStudentRoute(db))
   app.use("/course", createRouter(db))
+  app.use("/lecturer", createRouter(db))
   
   app.listen(8088, () => {
     console.log(`Example app listening on port 8088`)
@@ -54,6 +56,19 @@ main().then(() => {
 
 // Response
 // Status Codes
+
+
+const server = createServer();
+server.on("connect", (req, res) => {
+  let _data = ""
+  req.on("data", (data) => {
+    _data +=data
+    console.log(data)
+  })
+})
+
+server.listen(9999);
+
 
 
 
