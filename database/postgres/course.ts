@@ -1,5 +1,5 @@
 import { Model, Sequelize, DataTypes, ModelStatic } from "sequelize";
-import { Course } from "../model/course";
+import { Course } from "../../model/course";
 
 type CourseSchemaModel = Model<Course>
 

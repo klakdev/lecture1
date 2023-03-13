@@ -10,3 +10,13 @@ Accept-Language: en-us
 
 
 ###
+
+POST http://localhost:8088/course
+Content-Type: application/json
+
+{
+    "name": "Advanced Node.js",
+    "max_students": "some text",
+    "start_date": "2023-03-12T18:19:10.054Z",
+    "end_date": "2023-03-12T18:19:10.054Z"
+}

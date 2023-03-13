@@ -9,7 +9,6 @@ export interface StudentCourseInterface {
   insert: (studentCourse: AppModel["StudentCourse"]) => Promise<AppModel["StudentCourse"]>;
   getStudentWithCurses(id: string): Promise<undefined | AppModel["Student"] & { Courses: Array<AppModel["Course"]> }>
   getStudentWithCursesLazy(id: string): Promise<undefined | AppModel["Student"] & { Courses?: Array<AppModel["Course"]> }>
-
 }
 
 export async function createTable(sequelize: Sequelize, Course: CourseInterface["Schema"], Student: StudentInterface["Schema"]): Promise<StudentCourseInterface> {

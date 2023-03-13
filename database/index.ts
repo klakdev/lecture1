@@ -1,26 +1,9 @@
-import { createTables, getConnection } from "./createDatabase";
+import { main } from "./dynamodb"
+import { DB } from "./interfaces"
 
+export { DB }
 
-export async function main() {
-    const connection = getConnection();
-    const DB = await createTables(false, connection);
-    global.db = DB;
-    return DB;
+export async function init(): Promise<DB> {
+    const db = await main() as DB
+    return db;
 }
-
-
-// export let db: DB | null = null;
-// async function init(){
-//     db = await main()
-// }
-// init()
-
-// let db2: DB | null = null;
-// export async function getDB() {
-//     if(db2 === null) {
-//         db2 = await main()
-//     }
-//     return db2;
-// }
-
-export type DB = Awaited<ReturnType<typeof main>>

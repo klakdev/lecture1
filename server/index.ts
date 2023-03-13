@@ -1,14 +1,14 @@
 import express from "express"
 import { createStudentRoute } from "./student"
 import { createRouter } from "./course"
-import { main as initDB } from "../database"
+import { init } from "../database"
 import { createServer } from "http"
 
 
 async function main() {
   const app = express()
 
-  const db = await initDB()
+  const db = await init()
   app.use(express.json({ limit: "10kb" }))
   app.use("/student", createStudentRoute(db))
   app.use("/course", createRouter(db))

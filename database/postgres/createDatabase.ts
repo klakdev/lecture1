@@ -52,10 +52,10 @@ export async function createTables(createDB: boolean,sequelize: Sequelize) {
 
     const Student = await createStudent(connection);
     const Course = await createCourse(connection);
-    const studentCourse = await createStudentCourse(connection, Course.Schema, Student.Schema);
+    const StudentCourse = await createStudentCourse(connection, Course.Schema, Student.Schema);
     return {
         Student,
         Course,
-        studentCourse
+        StudentCourse
     }
 }
